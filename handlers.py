@@ -1,4 +1,5 @@
 import telegram
+import json
 from telegram.ext import (
     Filters,
     CommandHandler,
@@ -26,7 +27,13 @@ class Post(object):
             'photo': self.photo
         }
 
-        print(data)
+        with open('data.json', 'r') as file:
+            file_data = json.load(file)
+
+        file_data['data'].append(data)
+
+        with open('data.json', 'w') as file:
+            file.write(json.dumps(file_data))
 
 
 post = Post()
