@@ -2,12 +2,28 @@ import telegram
 from telegram.ext import (
     Filters,
     CommandHandler,
-    RegexHandler,
     MessageHandler
 )
 from emoji import emojize
 from decouple import config
 
+
+class Post(object):
+
+  def __init__(self):
+    self.location = None
+    self.photo = None
+
+  def clean(self):
+    self.location = None
+    self.photo = None
+
+  def save(self):
+    print(self.location)
+    print(self.photo)
+
+
+post = Post()
 
 def start(bot, update):
 
@@ -35,6 +51,18 @@ def support(bot, update):
   )
 
 
+def get_photo(bot, update, post=post):
+  post.photo = update.message.photo[-1].file_id
+
+
+def get_location(bot, update, post=post):
+
+  if post.photo:
+    post.location = update.message.location
+    post.save()
+    post.clean()
+
+
 def default(bot, update):
 
   """
@@ -53,4 +81,6 @@ def default(bot, update):
 
 start_handler = CommandHandler('start', start)
 help_handler = CommandHandler('support', support)
+photo_handler = MessageHandler(Filters.photo, get_photo)
+location_handler = MessageHandler(Filters.location, get_location)
 default_handler = MessageHandler(Filters.command, default)
