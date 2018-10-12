@@ -112,7 +112,7 @@ def default(bot, update):
     """
         A default message to unknown command messages.
     """
-    msg = "Desculpe, nao entendi sua mensagem."
+    msg = "Desculpe, não entendi sua mensagem."
     msg += emojize(':pensive:', use_aliases=True)
 
     bot.send_message(
