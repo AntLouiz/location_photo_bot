@@ -41,7 +41,7 @@ post = Post()
 
 def start(bot, update):
 
-    msg = "Olá, sou o Bot Karnissa."
+    msg = "Olá, sou o Vulture Bot."
 
     bot.send_message(
         chat_id=update.message.chat_id,
