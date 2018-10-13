@@ -1,5 +1,6 @@
 import telegram
 import json
+import datetime
 from telegram.ext import (
     Filters,
     CommandHandler,
@@ -13,10 +14,12 @@ class Post(object):
     def __init__(self):
         self.location = None
         self.photo = None
+        self.date = None
 
     def clean(self):
         self.location = None
         self.photo = None
+        self.date = None
 
     def save(self):
         data = {
@@ -24,7 +27,8 @@ class Post(object):
                 'latitude': self.location.latitude,
                 'longitude': self.location.longitude
             },
-            'photo': self.photo
+            'photo': self.photo,
+            'date': datetime.datetime.now().strftime("%Y%m%d")
         }
 
         with open('data.json', 'r') as file:
