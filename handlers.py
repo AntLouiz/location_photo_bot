@@ -113,9 +113,18 @@ def default(bot, update):
         parse_mode=telegram.ParseMode.MARKDOWN
     )
 
+    msg = "Envie uma foto e depois a localização para efetuar seu registro."
+
+    bot.send_message(
+        chat_id=update.message.chat_id,
+        text=msg,
+        parse_mode=telegram.ParseMode.MARKDOWN
+    )
+
 
 start_handler = CommandHandler('start', start)
 help_handler = CommandHandler('support', support)
 photo_handler = MessageHandler(Filters.photo, get_photo)
 location_handler = MessageHandler(Filters.location, get_location)
 default_handler = MessageHandler(Filters.command, default)
+default_message_handler = MessageHandler(Filters.text, default)
