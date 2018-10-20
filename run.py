@@ -4,7 +4,8 @@ from handlers import (
     help_handler,
     photo_handler,
     location_handler,
-    default_handler
+    default_handler,
+    default_message_handler
 )
 from settings import TELEGRAM_BOT_TOKEN
 
@@ -17,6 +18,7 @@ def main():
     dispatcher.add_handler(photo_handler)
     dispatcher.add_handler(location_handler)
     dispatcher.add_handler(default_handler)
+    dispatcher.add_handler(default_message_handler)
 
     updater.start_polling()
 
